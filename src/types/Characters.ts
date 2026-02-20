@@ -1,7 +1,7 @@
-export type Characters={
-    id:number,
-    name:string,
-    status:string,
-    species:string,
-    image: string
+export interface Character{
+    id: number;
+    name: string;
+    image: string;
+    species: string;
+    status: string;
 }
