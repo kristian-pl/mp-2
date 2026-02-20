@@ -6,8 +6,8 @@ import type {Character} from "./types/Character.ts";
 
 const ParentDiv=styled.div`
     width: 80vw;
-    margin: auto;
-    border: 5px darkgoldenrod solid;
+    margin: 0 auto;
+    border: 5px #647ff5 solid;
 `;
 
 export default function App(){
@@ -18,11 +18,9 @@ export default function App(){
         async function fetchData(): Promise<void> {
             const rawData = await fetch("https://api.disneyapi.dev/character");
             const json = await rawData.json();
-            console.log(json);
             const results: Character[] = json.data;
-
-            setData(results.slice(0,10));
-            //sliced here so it diplays 10 characters, before there were 51 !!
+            setData(results.slice(0,12));
+            //sliced here so it displays 10 characters, before there were 51 !!
         }
         fetchData()
             .then(() => console.log("Success!"))
