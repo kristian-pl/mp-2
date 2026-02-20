@@ -1,7 +1,8 @@
-import RickAndMorty from "./components/RickAndMorty.tsx";
+import Disney from "./components/Disney.tsx";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import {Character} from "./types/Characters.ts";
+import type {Character} from "./types/Character.ts";
+
 
 const ParentDiv=styled.div`
     width: 80vw;
@@ -11,15 +12,17 @@ const ParentDiv=styled.div`
 
 export default function App(){
 
-    // useState Hook to store Data.
     const [data, setData] = useState<Character[]>([]);
 
-    // useEffect Hook for error handling and re-rendering.
     useEffect(() => {
         async function fetchData(): Promise<void> {
-            const rawData = await fetch("https://rickandmortyapi.com/api/character");
-            const {results} : {results: Character[]} = await rawData.json();
-            setData(results);
+            const rawData = await fetch("https://api.disneyapi.dev/character");
+            const json = await rawData.json();
+            console.log(json);
+            const results: Character[] = json.data;
+
+            setData(results.slice(0,10));
+            //sliced here so it diplays 10 characters, before there were 51 !!
         }
         fetchData()
             .then(() => console.log("Success!"))
@@ -28,7 +31,7 @@ export default function App(){
 
     return(
         <ParentDiv>
-            <RickAndMorty data={data}/>
+            <Disney data={data}/>
         </ParentDiv>
     )
 }
